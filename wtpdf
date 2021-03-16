@@ -3,8 +3,10 @@
 import os
 import pdfkit
 import argparse
+import weasyprint
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+from urllib.error import URLError
 
 home_dir = os.path.expanduser('~')
 download_dir = os.path.join(home_dir,'Downloads')
@@ -19,24 +21,39 @@ def get_title_from_url(url):
     title = soup.title.string
     return title
 
-def download(url):
+def download_1(url):
     title = get_title_from_url(url)
     if title=='':
         title = 'Webpage {0}'.format(len(os.listdir(webtopdf_dir)))
     location = os.path.join(webtopdf_dir,title+'.pdf')
-    print('Downloading webpage . . .')
+    print('Attemp 1')
     pdfkit.from_url(url,location)
-    print('PDF saved.\n Access the file at {0}'.format(location))    
+    print('PDF saved at {0}'.format(location))    
 
-    
+def download_2(url):
+    title = get_title_from_url(url)
+    location = os.path.join(webtopdf_dir,title+'.pdf')
+    print("Attempt 2")
+    pdf = weasyprint.HTML(url).write_pdf()
+    open(location,'wb').write(pdf)
+    print("PDF saved at {0}".format(location))
+        
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('url',help='URL of the wbpage you want to convert to PDF.')
     args = parser.parse_args()
     try:
-        download(args.url)
+        print("Attempting to download webpage. . .")
+        download_1(args.url)
     except ValueError:
         print("Please use a valid link.")
+    except AttributeError:
+        print("\nIt seems there was an error while attempting\nto extract the title from the webpage.\n\nMake sure it doesn't require authetication.")
+    except URLError:
+        print("Make sure to provide a valid URL.")
+    except OSError:
+        download_2(args.url)
 
 if __name__=='__main__':
     main()

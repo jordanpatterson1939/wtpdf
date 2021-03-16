@@ -6,7 +6,7 @@ with open("README.md","r") as fh:
 
 setuptools.setup(
     name='wtpdf',
-    version='0.0.1',
+    version='0.0.2',
     scripts=['wtpdf'],
     author="Jordan Patterson",
     author_email="jordanpatterson1939@gmail.com",
@@ -20,6 +20,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=['pdfkit'],
+    install_requires=['pdfkit','weasyprint'],
     python_requires='>=3',
 )
