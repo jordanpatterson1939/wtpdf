@@ -11,6 +11,5 @@ pip install wtpdf
 ```text
 wtpdf https://insert-url-here
 ```
-> Navigate to $HOME/Downloads/WebToPDF
-> The file will be named after the title of the webpage
+> Navigate to $HOME/Downloads/WebToPDF, the file will be named after the title of the webpage
 
