@@ -20,4 +20,6 @@ Todo:
 > script to open the link in the browser instead and take screenshots as 
 > it scrolls down the page in fullscreen. After it has reached the bottom 
 > of the page, the browser should be closed and the processing of images 
-> into a single pdf file should be done.
+> into a single pdf file should be done. This will remove the need to use 
+> external libraries and/or programs(wkhtmltopdf) when converting while also 
+> achieving better resulting pdfs.
